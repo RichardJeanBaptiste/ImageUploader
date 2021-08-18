@@ -1,8 +1,10 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import upImg from '../images/image.svg';
 import { useDropzone } from 'react-dropzone';
 import {makeStyles} from '@material-ui/core/styles';
-import { Box, Typography, Button, CardContent} from '@material-ui/core';
+import { Box, Typography, Button, CardContent } from '@material-ui/core';
+const axios = require('axios');
+//const FormData = require('form-data');
 
 const useStyles = makeStyles({
     uploadStyle: {
@@ -83,6 +85,8 @@ function DropZone(props){
 
     const classes = useStyles();
 
+    const [filePath , setFilePath] = useState("");
+
     const {acceptedFiles, getRootProps, getInputProps, open} = useDropzone({
         maxFiles:1, 
         noClick: true,
@@ -90,7 +94,42 @@ function DropZone(props){
         accept: 'image/jpeg, image/png', 
     });
 
-    console.log(acceptedFiles);
+    function changeFilePath() {
+      setFilePath(acceptedFiles);
+    }
+    //console.log(acceptedFiles[0].path);
+    //setFilePath(acceptedFiles);
+
+    useEffect(()=> {
+
+      function uploadImage() {
+        if(acceptedFiles.length === 0){
+          console.log(" none ")
+        }else{
+
+          console.log(acceptedFiles)
+          setFilePath(acceptedFiles[0].path)
+
+          const formData = new FormData();
+
+          formData.append(
+            "Images",
+            filePath,
+          );
+
+          console.log("Form Data: " + formData.getAll('Images'))
+          
+          
+          
+          
+        }
+      }
+
+
+      uploadImage();
+    },[filePath, acceptedFiles]);
+
+    
 
     return(
         <CardContent>
@@ -100,7 +139,7 @@ function DropZone(props){
                 <input {...getInputProps()}/>
                 <Box className={classes.uploadStyle}>
                     <img src={upImg} alt="" className={classes.imgStyle}></img>
-                    <Typography variant="p" className={classes.subHeading2}>Drag & Drop your image here</Typography>
+                    <Typography variant="p" className={classes.subHeading2} onChange={changeFilePath}>Drag & Drop your image here</Typography>
                 </Box>
                 <Typography variant="p" align='center' className={classes.subHeading3}>Or</Typography>
                 <Button variant="contained" color="primary" className={classes.buttonStyle} onClick={open}>
