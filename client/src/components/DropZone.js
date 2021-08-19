@@ -1,10 +1,16 @@
+//clear acceptedfiles after post
+// work on loading screen after
+// create directory for saving images 
+// send link to frontend to save images
+
+
 import {React, useState, useEffect} from 'react';
 import upImg from '../images/image.svg';
 import { useDropzone } from 'react-dropzone';
 import {makeStyles} from '@material-ui/core/styles';
 import { Box, Typography, Button, CardContent } from '@material-ui/core';
 const axios = require('axios');
-//const FormData = require('form-data');
+
 
 const useStyles = makeStyles({
     uploadStyle: {
@@ -103,20 +109,11 @@ function DropZone(props){
     useEffect(()=> {
 
       function uploadImage() {
-        if(acceptedFiles.length === 0){
-          console.log(" none ")
-        }else{
 
-          console.log(acceptedFiles)
+        if(acceptedFiles.length !== 0){
           setFilePath(acceptedFiles[0].path)
 
           const formData = new FormData();
-
-          /*
-          formData.append('my_image', new Blob([filePath]), {
-            type: 'image/jpeg'
-          })
-          */
 
           formData.append('my_image', acceptedFiles[0])
           
