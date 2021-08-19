@@ -7,22 +7,15 @@ app = Flask(__name__)
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/image_upload', methods=['POST'])
 def upload_file():
-    #print(request.method)
-    print(request.files)
     try:
-        if request.method == 'GET':
-            print('ABCDEF')
-            
-        else:
-            print("request method error")
-
+        f = request.files['my_image']
+        f.save(secure_filename(f.filename))
+        return 'Image Saved'
     except:
-        print("failed to save")
-
+        return 'Something Broke'
     
-    return "abcdefg"
 
 
     

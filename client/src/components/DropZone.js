@@ -112,16 +112,23 @@ function DropZone(props){
 
           const formData = new FormData();
 
-          formData.append(
-            "Images",
-            filePath,
-          );
+          /*
+          formData.append('my_image', new Blob([filePath]), {
+            type: 'image/jpeg'
+          })
+          */
 
-          console.log("Form Data: " + formData.getAll('Images'))
+          formData.append('my_image', acceptedFiles[0])
           
-          
-          
-          
+          axios({
+            url: 'http://localhost:5000/image_upload',
+            method: 'POST',
+            data: formData,
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'multipart/form-data',
+            }
+          })
         }
       }
 
