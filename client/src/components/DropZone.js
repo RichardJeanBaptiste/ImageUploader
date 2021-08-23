@@ -9,6 +9,9 @@ import upImg from '../images/image.svg';
 import { useDropzone } from 'react-dropzone';
 import {makeStyles} from '@material-ui/core/styles';
 import { Box, Typography, Button, CardContent } from '@material-ui/core';
+import Loading from './Loading';
+import ShareImage from './ShareImage';
+import { uuid } from 'uuidv4';
 const axios = require('axios');
 
 
@@ -93,6 +96,10 @@ function DropZone(props){
 
     const [filePath , setFilePath] = useState("");
 
+    const [isUploaded, setIsUploaded] = useState(false);
+
+    const [readyShare, setReadyShare] = useState(false);
+
     const {acceptedFiles, getRootProps, getInputProps, open} = useDropzone({
         maxFiles:1, 
         noClick: true,
@@ -103,9 +110,8 @@ function DropZone(props){
     function changeFilePath() {
       setFilePath(acceptedFiles);
     }
-    //console.log(acceptedFiles[0].path);
-    //setFilePath(acceptedFiles);
-
+    
+    // Send Image To Server
     useEffect(()=> {
 
       function uploadImage() {
@@ -113,12 +119,14 @@ function DropZone(props){
         if(acceptedFiles.length !== 0){
           setFilePath(acceptedFiles[0].path)
 
+          const routeId = uuid();
           const formData = new FormData();
 
-          formData.append('my_image', acceptedFiles[0])
+
+          formData.append('user_image', acceptedFiles[0])
           
           axios({
-            url: 'http://localhost:5000/image_upload',
+            url: `http://localhost:5000/image_upload/${routeId}`,
             method: 'POST',
             data: formData,
             headers: {
@@ -126,6 +134,9 @@ function DropZone(props){
               'Content-Type': 'multipart/form-data',
             }
           })
+
+          setFilePath("");
+          setIsUploaded(true);
         }
       }
 
@@ -133,9 +144,26 @@ function DropZone(props){
       uploadImage();
     },[filePath, acceptedFiles]);
 
-    
+    // Get Image Link from Server
+    useEffect(() => {
 
-    return(
+    
+      function getImage(){
+
+        if(isUploaded === true){
+          setReadyShare(true);
+        }
+      }
+
+      getImage()
+    },[isUploaded])
+
+
+
+    // Check If A image was uploaded
+    if(isUploaded === false){
+
+      return(
         <CardContent>
             <Typography variant="h4" align='center' className={classes.cardTitle}>Upload your image</Typography>
             <Typography vaariant="p" align='center' className={classes.subHeading}>Files should Jpeg, Png...</Typography>
@@ -151,7 +179,22 @@ function DropZone(props){
                 </Button>
             </div>
         </CardContent>
-    )
+      )
+
+    }else if(isUploaded === true && readyShare === false){
+
+      return(
+        <Loading/>
+      )
+    
+    }else if(isUploaded === true && readyShare === true){
+
+      return (
+          <ShareImage/>
+      )
+    }
+
+    
 }
 
 

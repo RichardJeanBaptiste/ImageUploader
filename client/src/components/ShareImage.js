@@ -98,7 +98,7 @@ function ShareImage() {
         <Card className={classes.root}>
             <CheckCircleIcon className={classes.iconStyle}/>
             <Typography variant="h3" align='center' className={classes.headingStyle}> Uploaded Successfully!</Typography>
-            <img src={catImg} alt="cat image" className={classes.imageStyle}/>
+            <img src={catImg} alt="cat" className={classes.imageStyle}/>
             <Box className={classes.linkStyle}>
                 <Box className={classes.innerLinkGroup}>
                     <Typography variant="a" align='center' className={classes.setLinkStyle}>{imageLink}</Typography>

@@ -3,8 +3,8 @@ import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import {Card} from '@material-ui/core';
 import DropZone from './components/DropZone';
-import Loading from './components/Loading';
-import ShareImage from './components/ShareImage';
+//import Loading from './components/Loading';
+//import ShareImage from './components/ShareImage';
 
 const useStyles = makeStyles({
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 })
 
 /*
-
+    
       Upload image from client
       render loading component
       save image to server
@@ -37,8 +37,8 @@ function App() {
   return (
     <>
       <Card className={classes.root}>
-          <DropZone/>
-      </Card>
+        <DropZone/>
+      </Card>  
     </>
   );
 }
