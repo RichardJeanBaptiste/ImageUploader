@@ -8,14 +8,21 @@ import {React, useState, useEffect} from 'react';
 import upImg from '../images/image.svg';
 import { useDropzone } from 'react-dropzone';
 import {makeStyles} from '@material-ui/core/styles';
-import { Box, Typography, Button, CardContent } from '@material-ui/core';
+import { Box, Typography, Button, CardContent, Card } from '@material-ui/core';
 import Loading from './Loading';
 import ShareImage from './ShareImage';
 import { uuid } from 'uuidv4';
 const axios = require('axios');
 
-
 const useStyles = makeStyles({
+    root: {
+      position: 'absolute',
+      width: '402px',
+      height: '570px',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
     uploadStyle: {
         position: 'absolute',
         width: '338px',
@@ -100,12 +107,20 @@ function DropZone(props){
 
     const [readyShare, setReadyShare] = useState(false);
 
+    const [routeId] = useState(uuid());
+
+    const [sharePath, setSharePath] = useState("");
+
     const {acceptedFiles, getRootProps, getInputProps, open} = useDropzone({
         maxFiles:1, 
         noClick: true,
         noKeyboard: true,
         accept: 'image/jpeg, image/png', 
     });
+
+  
+
+    
 
     function changeFilePath() {
       setFilePath(acceptedFiles);
@@ -119,21 +134,23 @@ function DropZone(props){
         if(acceptedFiles.length !== 0){
           setFilePath(acceptedFiles[0].path)
 
-          const routeId = uuid();
           const formData = new FormData();
-
 
           formData.append('user_image', acceptedFiles[0])
           
-          axios({
-            url: `http://localhost:5000/image_upload/${routeId}`,
-            method: 'POST',
-            data: formData,
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'multipart/form-data',
-            }
-          })
+            axios({
+              url: `http://localhost:5000/image_upload/${routeId}`,
+              method: 'POST',
+              data: formData,
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+              }
+            }).catch(function (error) {
+              console.log(error);
+            });
+          
+          
 
           setFilePath("");
           setIsUploaded(true);
@@ -142,21 +159,22 @@ function DropZone(props){
 
 
       uploadImage();
-    },[filePath, acceptedFiles]);
+    },[filePath, acceptedFiles, routeId]);
 
-    // Get Image Link from Server
+    // Get Image Link from Server -> Handle Share Component
     useEffect(() => {
 
-    
       function getImage(){
 
         if(isUploaded === true){
+
+          setSharePath("http://localhost:5000/download/" + routeId + "-" + acceptedFiles[0].name)
           setReadyShare(true);
         }
       }
 
       getImage()
-    },[isUploaded])
+    },[isUploaded, acceptedFiles, routeId, sharePath])
 
 
 
@@ -164,10 +182,11 @@ function DropZone(props){
     if(isUploaded === false){
 
       return(
-        <CardContent>
-            <Typography variant="h4" align='center' className={classes.cardTitle}>Upload your image</Typography>
-            <Typography vaariant="p" align='center' className={classes.subHeading}>Files should Jpeg, Png...</Typography>
-            <div {...getRootProps({className: 'dropzone'})}>
+        <Card className={classes.root}>
+            <CardContent>
+              <Typography variant="h4" align='center' className={classes.cardTitle}>Upload your image</Typography>
+              <Typography vaariant="p" align='center' className={classes.subHeading}>Files should Jpeg, Png...</Typography>
+                <div {...getRootProps({className: 'dropzone'})}>
                 <input {...getInputProps()}/>
                 <Box className={classes.uploadStyle}>
                     <img src={upImg} alt="" className={classes.imgStyle}></img>
@@ -177,20 +196,27 @@ function DropZone(props){
                 <Button variant="contained" color="primary" className={classes.buttonStyle} onClick={open}>
                     <Typography className={classes.buttonTypo}>Choose a file</Typography>
                 </Button>
-            </div>
-        </CardContent>
+                </div>
+            </CardContent>
+        </Card>
+        
       )
 
     }else if(isUploaded === true && readyShare === false){
 
       return(
-        <Loading/>
+       
+          <Loading/>
+        
       )
     
     }else if(isUploaded === true && readyShare === true){
 
       return (
-          <ShareImage/>
+          <>
+            <ShareImage imageLink={sharePath}/>
+          </>
+          
       )
     }
 

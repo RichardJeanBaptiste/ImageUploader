@@ -36,9 +36,7 @@ function App() {
   
   return (
     <>
-      <Card className={classes.root}>
         <DropZone/>
-      </Card>  
     </>
   );
 }

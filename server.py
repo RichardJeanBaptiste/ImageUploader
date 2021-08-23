@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, send_file
+from flask import Flask, request, redirect, url_for, send_file, send_from_directory
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -19,22 +19,19 @@ def upload_file(id):
     except:
         return 'Something Broke'
 
-@app.route('/send_image/<pathToImg>', methods=['GET', 'POST'])
-def send_file(pathToImg):
-    try:
-        #return link
-        print(pathToImg)
-        pathToImg = "tmp/" + pathToImg
-        return 'path to img'
-    except:
-        return 'Failed to send Image'
 
-@app.route('/download/<pathToImg>')
+@app.route('/download/<pathToImg>', methods=['GET', 'POST'])
 def download_file(pathToImg):
     try:
-        send_file("tmp/"+ pathToImg)
+        return send_from_directory("tmp", filename=pathToImg, as_attachment=False)
     except:
         return 'Download Failed'
+
+
+
+
+
+    
 
 
 

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React,} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Typography, Box, Button} from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -86,11 +86,9 @@ const useStyles = makeStyles({
 
 
 
-function ShareImage() {
+function ShareImage(props) {
 
     const classes = useStyles();
-
-    const [ imageLink, setImageLink ] = useState("abcdefghijklmno");
 
     return (
 
@@ -98,10 +96,10 @@ function ShareImage() {
         <Card className={classes.root}>
             <CheckCircleIcon className={classes.iconStyle}/>
             <Typography variant="h3" align='center' className={classes.headingStyle}> Uploaded Successfully!</Typography>
-            <img src={catImg} alt="cat" className={classes.imageStyle}/>
+            <img src={props.imageLink} alt={catImg} className={classes.imageStyle}/>
             <Box className={classes.linkStyle}>
                 <Box className={classes.innerLinkGroup}>
-                    <Typography variant="a" align='center' className={classes.setLinkStyle}>{imageLink}</Typography>
+                    <Typography variant="a" align='center' className={classes.setLinkStyle}>{props.imageLink}</Typography>
                     <Button className={classes.buttonStyle}>
                         <Typography variant="p" align='center' className={classes.innerButtonStyle}>Copy Link</Typography>
                     </Button>
