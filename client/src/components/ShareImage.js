@@ -1,4 +1,4 @@
-import { React,} from 'react';
+import { React, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Typography, Box, Button} from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -57,11 +57,13 @@ const useStyles = makeStyles({
         width: '100%',
     },
     buttonStyle: {
+        position: 'absolute',
         background: '#2F80ED',
         borderRadius: '8px',
-        marginLeft: '48%',
+        marginTop: '-.5%',
+        marginLeft: '-5%',
         height: '40px',
-        width: '100px'
+        width: '80px'
     },
     innerButtonStyle: {
         fontFamily: 'Poppins',
@@ -76,10 +78,10 @@ const useStyles = makeStyles({
         fontFamily: 'Poppins',
         fontStyle: 'normal',
         fontWeight: 500,
-        fontSize: '11px',
+        fontSize: '10px',
         lineHeight: '12px',
         letterSpacing: '-0.035em',
-        color: '#4F4F4F'
+        color: '#4F4F4F',
     }
 
 })
@@ -89,6 +91,13 @@ const useStyles = makeStyles({
 function ShareImage(props) {
 
     const classes = useStyles();
+
+    const [imgLink] = useState(props.imageLink);
+
+    function copyLink(e) {
+        navigator.clipboard.writeText(imgLink);
+        alert("link copied")
+    }
 
     return (
 
@@ -101,7 +110,7 @@ function ShareImage(props) {
                 <Box className={classes.innerLinkGroup}>
                     <Typography variant="a" align='center' className={classes.setLinkStyle}>{props.imageLink}</Typography>
                     <Button className={classes.buttonStyle}>
-                        <Typography variant="p" align='center' className={classes.innerButtonStyle}>Copy Link</Typography>
+                        <Typography variant="p" align='center' className={classes.innerButtonStyle} onClick={copyLink}>Copy Link</Typography>
                     </Button>
                 </Box>
             </Box>

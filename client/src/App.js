@@ -1,42 +1,34 @@
 import './App.css';
-
 import { makeStyles } from '@material-ui/core/styles';
-import {Card} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import DropZone from './components/DropZone';
-//import Loading from './components/Loading';
-//import ShareImage from './components/ShareImage';
 
 const useStyles = makeStyles({
-
   root: {
-      position: 'absolute',
-      width: '402px',
-      height: '570px',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+    position: 'absolute',
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 700,
+    fontSize: '14px',
+    lineHeight: '17.07px',
+    color: '#A9A9A9', 
+    top: '96.5%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
   },
-
+  username: {
+    textDecoration: 'underline'
+  }
 })
-
-/*
-    
-      Upload image from client
-      render loading component
-      save image to server
-      server return link to client
-      render ShareImage component
-
-*/
 
 function App() {
 
   const classes = useStyles();
 
-  
   return (
     <>
         <DropZone/>
+        <Typography variant="p" className={classes.root} align='center'>created by Richinbk - devChallenges.io</Typography>
     </>
   );
 }

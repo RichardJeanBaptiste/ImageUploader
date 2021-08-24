@@ -1,9 +1,3 @@
-//clear acceptedfiles after post
-// work on loading screen after
-// create directory for saving images 
-// send link to frontend to save images
-
-
 import {React, useState, useEffect} from 'react';
 import upImg from '../images/image.svg';
 import { useDropzone } from 'react-dropzone';
