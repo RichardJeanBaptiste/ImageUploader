@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     root: {
         position: 'absolute',
         width: '35%',
-        height: '95%',
+        height: '99%',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -37,8 +37,8 @@ const useStyles = makeStyles({
     linkStyle: {
         position: 'absolute',
         top: '86%',
-        left: '12%',
-        width: '80%',
+        left: '7.5%',
+        width: '87%',
         height: '8%',
         backgroundColor: '#F6F8FB',
         borderRadius: '8px',
@@ -60,10 +60,10 @@ const useStyles = makeStyles({
         position: 'absolute',
         background: '#2F80ED',
         borderRadius: '8px',
-        marginTop: '-.5%',
-        marginLeft: '-5%',
-        height: '40px',
-        width: '80px'
+        marginTop: '-6.0%',
+        marginLeft: '55%',
+        height: '41px',
+        width: '104px'
     },
     innerButtonStyle: {
         fontFamily: 'Poppins',
@@ -109,8 +109,8 @@ function ShareImage(props) {
             <Box className={classes.linkStyle}>
                 <Box className={classes.innerLinkGroup}>
                     <Typography variant="a" align='center' className={classes.setLinkStyle}>{props.imageLink}</Typography>
-                    <Button className={classes.buttonStyle}>
-                        <Typography variant="p" align='center' className={classes.innerButtonStyle} onClick={copyLink}>Copy Link</Typography>
+                    <Button className={classes.buttonStyle} onClick={copyLink}>
+                        <Typography variant="p" align='center' className={classes.innerButtonStyle}>Copy Link</Typography>
                     </Button>
                 </Box>
             </Box>

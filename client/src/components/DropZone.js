@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     root: {
       position: 'absolute',
       width: '402px',
-      height: '570px',
+      height: '99%',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
@@ -79,7 +79,7 @@ const useStyles = makeStyles({
         background: '#2F80ED',
         width: '115px',
         height: '33px',
-        bottom: '4%',
+        bottom: '7.37%',
         left: '35%',
       },
     
@@ -133,7 +133,8 @@ function DropZone(props){
           formData.append('user_image', acceptedFiles[0])
           
             axios({
-              url: `https://richinbkimageuploader.herokuapp.com/image_upload/${routeId}`,
+              url: `http://richinbkimageuploader.herokuapp.com/image_upload/${routeId}`,
+              //url: `http://localhost:5000/image_upload/${routeId}`,
               method: 'POST',
               data: formData,
               headers: {
@@ -162,7 +163,8 @@ function DropZone(props){
 
         if(isUploaded === true){
 
-          setSharePath("https://richinbkimageuploader.herokuapp.com/download/" + routeId + "-" + acceptedFiles[0].name)
+          setSharePath("http://richinbkimageuploader.herokuapp.com/download/" + routeId + "-" + acceptedFiles[0].name)
+          //setSharePath("http://localhost:5000/download/" + routeId + "-" + acceptedFiles[0].name)
           setReadyShare(true);
         }
       }
