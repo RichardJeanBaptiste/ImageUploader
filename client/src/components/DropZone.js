@@ -133,7 +133,7 @@ function DropZone(props){
           formData.append('user_image', acceptedFiles[0])
           
             axios({
-              url: `http://localhost:5000/image_upload/${routeId}`,
+              url: `https://richinbkimageuploader.herokuapp.com/image_upload/${routeId}`,
               method: 'POST',
               data: formData,
               headers: {
@@ -162,7 +162,7 @@ function DropZone(props){
 
         if(isUploaded === true){
 
-          setSharePath("http://localhost:5000/download/" + routeId + "-" + acceptedFiles[0].name)
+          setSharePath("https://richinbkimageuploader.herokuapp.com/download/" + routeId + "-" + acceptedFiles[0].name)
           setReadyShare(true);
         }
       }
