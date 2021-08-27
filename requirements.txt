@@ -4,7 +4,7 @@ beautifulsoup4==4.9.3
 blivet==3.3.3
 #blivet-gui==2.3.0
 chardet==4.0.0
-click==7.1.2
+#click==7.1.2
 cupshelpers==1.0
 dasbus==1.4
 dbus-python==1.2.18
