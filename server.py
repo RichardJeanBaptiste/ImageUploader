@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, send_file, send_from_directory, send_static_file
+from flask import Flask, request, redirect, url_for, send_file, send_from_directory
 from werkzeug.utils import secure_filename
 import os
 
@@ -7,8 +7,8 @@ app = Flask(__name__, static_url_path='/', static_folder='./client/build')
 
 @app.route("/")
 def hello_world():
-    return app.send_static_file('index.html')
-    #return send_from_directory(app.static_folder, 'index.html')
+    #return app.send_static_file('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/image_upload/<id>', methods=['POST'])
 def upload_file(id):
