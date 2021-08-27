@@ -9,8 +9,7 @@ app = Flask(__name__, static_url_path='/', static_folder='client/build')
 #client/build/index.html
 @app.route("/")
 def hello_world():
-    return 'abcdef'
-    #return app.send_static_file('index.html')
+    return app.send_static_file('index.html')
     #return render_template('client/build/index.html')
     #return send_from_directory(app.static_folder, 'index.html')
 
