@@ -2,9 +2,9 @@ from flask import Flask, request, redirect, url_for, send_file, send_from_direct
 from werkzeug.utils import secure_filename
 import os
 
-app = Flask(__name__, static_url_path='/', static_folder='./client/build')
+app = Flask(__name__, static_url_path='/', static_folder='client/build')
 
-
+#client/build/index.html
 @app.route("/")
 def hello_world():
     #return app.send_static_file('index.html')
