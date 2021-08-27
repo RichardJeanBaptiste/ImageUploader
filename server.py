@@ -7,6 +7,7 @@ app = Flask(__name__, static_url_path='', static_folder='client/build')
 
 @app.route("/")
 def hello_world():
+    #return app.send_static_file('index.html')
     return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/image_upload/<id>', methods=['POST'])
@@ -29,7 +30,8 @@ def download_file(pathToImg):
     except:
         return "Download Failed"
 
-
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
 
 
 
