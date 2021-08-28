@@ -17,8 +17,9 @@ def upload_file(id):
     try:
         print('image upload')
         print(request)
-        print('request files - ' + request.files)
+        print(request.files)
         f = request.files['user_image']
+        print(f)
         return 'abc'
         #print( " files - " + f)
         #imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
