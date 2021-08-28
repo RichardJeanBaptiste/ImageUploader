@@ -20,14 +20,11 @@ def upload_file(id):
         print(request.files)
         f = request.files['user_image']
         print(f)
-        return 'abc'
-        #print( " files - " + f)
+        imgLocation = "clientfolder/" + id + "-" + secure_filename(f.filename)
+        f.save(imgLocation)
         #imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
-        #print( "Image Location - " + imgLoaction)
-        #f.save(imgLocation)
-        #imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
-        #print("Image ROute - " + imgRoute)
-        #return redirect(imgRoute)
+        imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
+        return redirect(imgRoute)
     except:
         return 'Something Broke'
 
@@ -35,8 +32,8 @@ def upload_file(id):
 @app.route('/download/<pathToImg>', methods=['GET', 'POST'])
 def download_file(pathToImg):
     try:
-        #print(pathToImg)
-        sendImage = app.config['UPLOAD_PATH'] + "/" + pathToImg
+        #sendImage = app.config['UPLOAD_PATH'] + "/" + pathToImg
+        sendImage = "clientfolder/" + pathToImg
         return send_file(sendImage)
         #return send_file("tmp/tinder.jpg")
         #return send_from_directory(app.config['UPLOAD_PATH'], path=pathToImg, as_attachment=False)
