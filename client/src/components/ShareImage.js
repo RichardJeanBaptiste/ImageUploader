@@ -60,10 +60,10 @@ const useStyles = makeStyles({
         position: 'absolute',
         background: '#2F80ED',
         borderRadius: '8px',
-        marginTop: '-6.0%',
-        marginLeft: '55%',
+        marginTop: '-10%',
+        marginLeft: '65%',
         height: '41px',
-        width: '104px'
+        width: '115px',
     },
     innerButtonStyle: {
         fontFamily: 'Poppins',
@@ -82,6 +82,9 @@ const useStyles = makeStyles({
         lineHeight: '12px',
         letterSpacing: '-0.035em',
         color: '#4F4F4F',
+    },
+    innerBox: {
+        width: '30%',
     }
 
 })
@@ -109,9 +112,11 @@ function ShareImage(props) {
             <Box className={classes.linkStyle}>
                 <Box className={classes.innerLinkGroup}>
                     <Typography variant="a" align='center' className={classes.setLinkStyle}>{props.imageLink}</Typography>
-                    <Button className={classes.buttonStyle} onClick={copyLink}>
-                        <Typography variant="p" align='center' className={classes.innerButtonStyle}>Copy Link</Typography>
-                    </Button>
+                    <Box className={classes.innerBox}>
+                        <Button className={classes.buttonStyle} onClick={copyLink}>
+                            <Typography variant="p" align='center' className={classes.innerButtonStyle}>Copy Link</Typography>
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Card>
