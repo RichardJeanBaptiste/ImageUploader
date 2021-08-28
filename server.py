@@ -16,14 +16,16 @@ def hello_world():
 def upload_file(id):
     try:
         print('image upload')
+        print(request)
         f = request.files['user_image']
         print( " files - " + f)
-        imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
-        print( "Image Location - " + imgLoaction)
-        f.save(imgLocation)
-        imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
-        print("Image ROute - " + imgRoute)
-        return redirect(imgRoute)
+        #imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
+        #print( "Image Location - " + imgLoaction)
+        #f.save(imgLocation)
+        #imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
+        #print("Image ROute - " + imgRoute)
+        #return redirect(imgRoute)
+        return 'abcdef'
     except:
         return 'Something Broke'
 
