@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__, static_folder='./build', static_url_path='/',)
+os.mkdir('uploads')
 app.config['UPLOAD_PATH'] = 'uploads'
 
 
