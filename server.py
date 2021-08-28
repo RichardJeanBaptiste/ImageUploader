@@ -15,15 +15,14 @@ def hello_world():
 @app.route('/image_upload/<id>', methods=['POST'])
 def upload_file(id):
     try:
+        print('image upload')
         f = request.files['user_image']
+        print( " files - " + f)
         imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
+        print( "Image Location - " + imgLoaction)
         f.save(imgLocation)
         imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
-        print('------------------------------Image Route Debugging------------------------------')
-        print(imgLocation)
-        print(imgRoute)
-        print(os.listdir(app.config['UPLOAD_PATH']))
-        print('------------------------------------------------------------')
+        print("Image ROute - " + imgRoute)
         return redirect(imgRoute)
     except:
         return 'Something Broke'
