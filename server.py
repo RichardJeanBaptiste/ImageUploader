@@ -18,6 +18,11 @@ def upload_file(id):
         imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
         f.save(imgLocation)
         imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
+        print('------------------------------Image Route Debugging------------------------------')
+        print(imgLocation)
+        print(imgRoute)
+        print(os.listdir(app.config['UPLOAD_PATH']))
+        print('------------------------------------------------------------')
         return redirect(imgRoute)
     except:
         return 'Something Broke'
