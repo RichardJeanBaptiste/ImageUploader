@@ -164,8 +164,9 @@ function DropZone(props){
         if(isUploaded === true){
 
           setSharePath("https://richinbkimageuploader.herokuapp.com/download/" + routeId + "-" + acceptedFiles[0].name)
+
+          setTimeout(function(){ setReadyShare(true); }, 5000);
           //setSharePath("http://localhost:5000/download/" + routeId + "-" + acceptedFiles[0].name)
-          setReadyShare(true);
         }
       }
 
