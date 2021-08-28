@@ -16,7 +16,7 @@ def hello_world():
 def upload_file(id):
     try:
         print('image upload')
-        print(request.files)
+        print('request files - ' + request.files)
         f = request.files['user_image']
         print( " files - " + f)
         imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
@@ -32,7 +32,7 @@ def upload_file(id):
 @app.route('/download/<pathToImg>', methods=['GET', 'POST'])
 def download_file(pathToImg):
     try:
-        print(pathToImg)
+        #print(pathToImg)
         sendImage = app.config['UPLOAD_PATH'] + "/" + pathToImg
         return send_file(sendImage)
         #return send_file("tmp/tinder.jpg")
