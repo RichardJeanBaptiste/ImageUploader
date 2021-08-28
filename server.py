@@ -9,6 +9,7 @@ app.config['UPLOAD_PATH'] = 'uploads'
 
 @app.route("/")
 def hello_world():
+    print('server started')
     return app.send_static_file('index.html')
 
 @app.route('/image_upload/<id>', methods=['POST'])
