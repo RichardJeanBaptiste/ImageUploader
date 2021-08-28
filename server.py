@@ -3,8 +3,8 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__, static_folder='./build', static_url_path='/',)
-os.mkdir('uploads')
-app.config['UPLOAD_PATH'] = 'uploads'
+os.mkdir('CLIENT_UPLOADS')
+app.config['UPLOAD_PATH'] = 'CLIENT_UPLOADS'
 
 
 
@@ -20,13 +20,12 @@ def upload_file(id):
         print(request.files)
         f = request.files['user_image']
         print( " files - " + f)
-        #imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
-        #print( "Image Location - " + imgLoaction)
-        #f.save(imgLocation)
-        #imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
-        #print("Image ROute - " + imgRoute)
-        #return redirect(imgRoute)
-        return 'abcdef'
+        imgLocation = app.config['UPLOAD_PATH'] + "/" + id + "-" + secure_filename(f.filename)
+        print( "Image Location - " + imgLoaction)
+        f.save(imgLocation)
+        imgRoute = "/download/" + id + '-' + secure_filename(f.filename)
+        print("Image ROute - " + imgRoute)
+        return redirect(imgRoute)
     except:
         return 'Something Broke'
 
